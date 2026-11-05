@@ -1,32 +1,21 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      python: 3.12
-  pre_build:
-    commands:
-      - echo Installing dependencies...
-      - pip install -r requirements.txt
-      - pip install pytest pytest-cov
+  # Add your previous content here
   build:
     commands:
       - echo Running tests...
-      - export PYTHONPATH=.
-      - pytest tests/ --cov=app
-      - echo Building the application...
-      - pip install wheel
-      - python setup.py bdist_wheel
-  post_build:
-    commands:
-      - echo Build completed on `date`
+      - pytest tests/ --cov=app --cov-report=xml # Add cov-report flag here
+  # Add rest of your build commands if any
+
+# New section starts here
+reports:
+  coverage:
+    files:
+      - coverage.xml
+    file-format: CLOVERXML
+
+# New section ends here
 
 artifacts:
-  files:
-    - appspec.yml
-    - app.py
-    - templates/**/*
-    - requirements.txt
-    - scripts/**/*
-    - dist/**/*
-  discard-paths: no
+  # Add your previous artifact definitions here
